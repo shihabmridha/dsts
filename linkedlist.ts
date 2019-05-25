@@ -1,8 +1,8 @@
 class Node {
-    value: Number;
+    value: number;
     next: Node;
 
-    constructor(value: Number) {
+    constructor(value: number) {
         this.value = value;
         this.next = null;
     }
@@ -10,27 +10,26 @@ class Node {
 
 class List {
     private root: Node;
+    private lastNode: Node;
 
     constructor() {
         this.root = null;
     }
 
-    add(value: Number): void {
-        let head = this.root;
+    add(value: number): void {
+        const head = this.root;
 
         if (head === null) {
             this.root = new Node(value);
+            this.lastNode = this.root;
             return;
         }
 
-        while(head.next !== null) {
-            head = head.next;
-        }
-
-        head.next = new Node(value);
+        this.lastNode.next = new Node(value);
+        this.lastNode = this.lastNode.next;
     }
 
-    remove(value: Number): void {
+    remove(value: number): void {
         let head = this.root;
 
         if (!head) {
@@ -46,8 +45,11 @@ class List {
         while (head.next !== null) {
             if (head.next.value === value) {
                 head.next = head.next.next;
+                if (head.next === null) {
+                    this.lastNode = head;
+                }
             } else {
-                head = head.next
+                head = head.next;
             }
         }
     }
@@ -55,8 +57,8 @@ class List {
     print(): void {
         let head = this.root;
         while (head !== null) {
-            console.log(head.value)
-            head = head.next
+            console.log(head.value);
+            head = head.next;
         }
     }
 }
@@ -77,4 +79,4 @@ list.remove(3);
 list.print();
 
 // HACK: https://github.com/Microsoft/TypeScript/issues/16143
-export {}
+export {};
