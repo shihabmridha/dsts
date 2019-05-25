@@ -9,17 +9,17 @@ class Node {
 }
 
 class List {
-    private head: Node;
+    private root: Node;
 
     constructor() {
-        this.head = null;
+        this.root = null;
     }
 
     add(value: Number): void {
-        let head = this.head;
+        let head = this.root;
 
         if (head === null) {
-            this.head = new Node(value);
+            this.root = new Node(value);
             return;
         }
 
@@ -30,9 +30,31 @@ class List {
         head.next = new Node(value);
     }
 
+    remove(value: Number): void {
+        let head = this.root;
+
+        if (!head) {
+            console.log('List is empty');
+            return;
+        }
+
+        if (head.value === value) {
+            this.root = head.next;
+            head = head.next;
+        }
+
+        while (head.next !== null) {
+            if (head.next.value === value) {
+                head.next = head.next.next;
+            } else {
+                head = head.next
+            }
+        }
+    }
+
     print(): void {
-        let head = this.head;
-        while (head != null) {
+        let head = this.root;
+        while (head !== null) {
             console.log(head.value)
             head = head.next
         }
@@ -45,6 +67,12 @@ list.add(3);
 list.add(4);
 list.add(6);
 list.add(1);
+list.add(1);
+
+list.print();
+
+list.remove(1);
+list.remove(3);
 
 list.print();
 
