@@ -8,10 +8,6 @@
         "quotemark": false,
         "no-var-requires": false,
         "triple-equals": true,
-        "linebreak-style": [
-            true,
-            "LF"
-        ],
         "prefer-switch": false,
         "no-invalid-template-strings": true,
         "no-invalid-this": false,
@@ -38,7 +34,9 @@
         ],
         "object-literal-key-quotes": [true, "consistent-as-needed"],
         "prefer-const": true,
-        "no-unused-expression": false
+        "no-unused-expression": false,
+        "member-access": [true, "no-public"],
+        "no-console": [false, "no-public"]
     },
     "rulesDirectory": []
 }
